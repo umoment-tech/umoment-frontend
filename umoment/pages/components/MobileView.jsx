@@ -28,6 +28,40 @@ const MobileView = () => {
     }
     const handleGroupImageSave = () => {}
 
+    // Function to fetch coordinates for a given address
+function fetchCoordinates(address, apiKey) {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+  
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.status === 'OK') {
+          // Assuming the first result is the most relevant
+          const location = data.results[0].geometry.location;
+          return { lat: location.lat, lng: location.lng };
+        } else {
+          throw new Error('Geocoding failed: ' + data.status);
+        }
+      });
+  }
+  
+  // Geocode an address
+  function geocodeAddress(address, apiKey) {
+    fetchCoordinates(address, apiKey)
+      .then(coordinates => {
+        console.log(`Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}`);
+        // Here you can return the coordinates, or perhaps resolve them if using Promises or async/await
+      })
+      .catch(error => {
+        console.error('Geocoding error:', error);
+      });
+  }
+  
 
     // function to create an event and post to an api
     const createEvent = () => {
@@ -53,8 +87,8 @@ const MobileView = () => {
             image = reader.result;
              
         var time = "12:00 PM";
-        var latitude = 40.7982;
-        var longitude = 77.8599;
+        geocodeAddress(document.getElementById('address').value, "AIzaSyBpNZY8yooagkpBggh0gGFidugowmWh5Hg");
+
 
         
 
