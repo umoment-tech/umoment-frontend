@@ -25,57 +25,27 @@ export default function Home() {
 
 
         <div className="py-10 px-6">
-          <h1 className="flex justify-center mb-5 text-white text-xl font-semibold">🔥 Trending Today</h1>
+          <h1 className="flex justify-center mb-5 text-white text-4xl font-semibold">Today's Events</h1>
 
           <EventCard
             id={10101}
-            name={"Joe Biden's 89th Bday "}
-            location={"White House"}
-            description={"We gon get litty!"}
-            imageArray={""}
+            name={"HackPSU 2024"}
+            organizer={"Paraton"}
+            location={"State College"}
+            description={"It's Hacking Time!"}
+            imageArray={"https://app.hackpsu.org/assets/Fall%202022/vw-hackpsu-logo.png"}
             postTime={"Last Night"}
-            eventTime={"9:00 PM"}
+            eventTime={"12:00 PM"}
             attendees={["Kshitij", "Joe M.", "Barack"]}
           />
 
-          <EventCard
-            id={10101}
-            name={"Joe Biden's 89th Bday "}
-            location={"White House"}
-            description={"We gon get litty!"}
-            imageArray={""}
-            postTime={"Last Night"}
-            eventTime={"9:00 PM"}
-            attendees={["Kshitij", "Joe M.", "Barack"]}
-          />
-
-          <EventCard
-            id={10101}
-            name={"Joe Biden's 89th Bday "}
-            location={"White House"}
-            description={"We gon get litty!"}
-            imageArray={""}
-            postTime={"Last Night"}
-            eventTime={"9:00 PM"}
-            attendees={["Kshitij", "Joe M.", "Barack"]}
-          />
-
-          <EventCard
-            id={10101}
-            name={"Joe Biden's 89th Bday "}
-            location={"White House"}
-            description={"We gon get litty!"}
-            imageArray={""}
-            postTime={"Last Night"}
-            eventTime={"9:00 PM"}
-            attendees={["Kshitij", "Joe M.", "Barack"]}
-          />
+         
 
           <GroupCard
             id={10101}
-            name={"O Block"}
-            description={"Ramadan Mubarak"}
-            image={"https://pbs.twimg.com/media/Fxt8f0XaYAE6nwW.jpg:large"}
+            name={"CTFGuide"}
+            description={"It's CTF time!"}
+            image={"https://www.f6s.com/content-resource/media/4693001_f01a71ebec03b80e231eceaf61fdd7631880ee88.png"}
             members={["Kshitij", "Joe M.", "Barack"]}
           />
 

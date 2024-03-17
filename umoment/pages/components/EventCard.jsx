@@ -1,7 +1,7 @@
 import React from 'react';
 //import { Tooltip } from 'react-tooltip';
 
-const EventCard = ({ id, name, location, description, imageArray, longX, longY, postTime, eventTime, attendees }) => {
+const EventCard = ({ id, name, organizer, location, description, imageArray, longX, longY, postTime, eventTime, attendees }) => {
 
 
     return (
@@ -24,19 +24,23 @@ const EventCard = ({ id, name, location, description, imageArray, longX, longY, 
                         <div className="mt-4 text-lg leading-8 text-gray-300">
                             <h1 className="text-2xl font-semibold text-white"></h1>
                             <div className="grid grid-cols-2">
-                                <h1 className="text-lg text-white">{name} </h1>
+                                <h1 className="text-2xl text-white">{name} </h1>
                                 <h1 className="text-white font-white text-lg flex justify-end">
                                     <i class="fas fa-solid fa-calendar mt-1 mr-2"></i>{' '}
                                     {eventTime}
                                 </h1>
                             </div>
+                            <h1 className="text-lg text-white">Host: {organizer} </h1>
 
-                            <h1 className="text-sm mb-2 text-white">{`"${description}"`}</h1>
+
                             <img
-                                src={"https://www.whitehouse.gov/wp-content/uploads/2021/04/P20210303AS-1901-cropped.jpg?w=1536"}
+                                src={imageArray}
                                 width=""
                                 className="rounded-sm mb-5"
                             />
+                            <h1 className="py-4 flex justify-center text-sm mb-2 text-white">{`"${description}"`}</h1>
+
+                            <h1 className="text-md text-white">Location: {location} </h1>
                             <div className="grid grid-cols-2">
                                 <h1 className="text-md text-white">Posted: {postTime} </h1>
                                 <h1 className="text-white font-white text-lg flex justify-end">
