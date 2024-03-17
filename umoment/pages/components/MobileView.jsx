@@ -29,6 +29,50 @@ const MobileView = () => {
     const handleGroupImageSave = () => {}
 
 
+    // function to create an event and post to an api
+    const createEvent = () => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "https://today-node-production.up.railway.app/createEvent", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+        };
+        var eventName = document.getElementById("eventname").value;
+        var description = document.getElementById("description").value;
+        var location = document.getElementById("location").value;
+        var image = ""
+        var fileImage = document.getElementById("bannerImageInput").files[0];
+        // convert image to base 64
+
+        var reader = new FileReader();
+        reader.readAsDataURL(fileImage);
+        reader.onloadend = function () {           
+            image = reader.result;
+             
+        var time = "12:00 PM";
+        var latitude = 40.7982;
+        var longitude = 77.8599;
+
+        
+
+        var event = {
+            "name": eventName,
+            "description": description,
+            "location": location,
+            "image": image,
+            "time": time,
+            "latitude": latitude,
+            "longitude": longitude
+        }
+        xhttp.send(JSON.stringify(event));
+        }
+
+       
+    }
+
     return (
         <>
             {/* Event Add */}
@@ -58,29 +102,29 @@ const MobileView = () => {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <div style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: "#161716" }}
-                                className="max-w-6xl relative inline-block align-bottom w-5/6  pb-10 pt-10 bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
+                            <div style={{ fontFamily: 'Poppins, sans-serif'}}
+                                className="max-w-6xl relative inline-block shadow-lg align-bottom w-5/6  pb-20 pt-6 bg-neutral-900  rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
                                 <div>
                                     <div className="mt-3 sm:mt-5">
                                         <h1 className="text-white text-4xl text-center pb-4">Add Event</h1>
                                         <div className="">
 
                                             <div className="h-96">
-                                                <div className="">
+                                                <div className="my-1">
                                                     <label className="text-white flex justify-center">Event Name:</label>
-                                                    <input type="text" className="border border-gray-600 mt-1 mb-4" ></input>
+                                                    <input id="eventname" type="text" className="py-1 border-2  mt-2 border-neutral-700  p-3 rounded-md bg-transparent text-white bg-black duration-1000 border" placeholder="What is it?"></input>  
                                                 </div>
-                                                <div className="">
+                                                <div className="py-1">
                                                     <label className="text-white flex justify-center">Description:</label>
-                                                    <input type="text" className="border border-gray-600 mt-1 mb-4" />
+                                                    <input id="description" type="text" className="py-1 border-2 mt-2  border-neutral-700  p-3 rounded-md bg-transparent text-white bg-black duration-1000" placeholder="What's happening?"></input>  
                                                 </div>
-                                                <div className="">
+                                                <div className="py-1">
                                                     <label className="text-white flex justify-center">Location:</label>
-                                                    <input type="text" className="border border-gray-600 mt-1 mb-4" />
+                                                    <input id="location" type="text" className="py-1 border-2 mt-2 border-neutral-700      -gray-500 p-3 rounded-md bg-transparent text-white bg-black duration-1000 " placeholder="Where is it?"></input>  
                                                 </div>
 
-                                                <div className="">
-                                                    <label className="text-white flex justify-center">Image:</label>
+                                                <div className="py-1">
+                                                    <label className="text-white flex justify-center py-2">Image:</label>
                                                     <label htmlFor="bannerImageInput">
                                                         {selectedImage ? (
                                                             <div className="h-full w-full flex-1 justify-center">
@@ -92,7 +136,7 @@ const MobileView = () => {
                                                                         height: "12vh",
                                                                         alt: "Selected Banner"
                                                                     }}
-                                                                    className=" border border-neutral-600 lg:h-30 sm:w-full"
+                                                                    className=" border border-neutral-800 lg:h-30 sm:w-full"
                                                                 >
                                                                 </div>
                                                                 <h1 className="text-white text-xl text-center font-bold mt-4">
@@ -100,9 +144,9 @@ const MobileView = () => {
                                                                 </h1>
                                                             </div>
                                                         ) : (
-                                                            <div className="border border-gray-700 rounded-md mt-2 pt-4 py-4 mx-24">
+                                                            <div className="border border-neutral-700 border-2 rounded-md mt-2 pt-4 py-4 mx-24">
                                                                 <svg
-                                                                    className="mx-auto h-12 w-12 text-gray-400"
+                                                                    className="mx-auto h-12 w-12 text-neutral-800"
                                                                     fill="none"
                                                                     stroke="currentColor"
                                                                     viewBox="0 0 24 24"
@@ -114,7 +158,7 @@ const MobileView = () => {
                                                                         d="M12 4v16m8-8H4"
                                                                     />
                                                                 </svg>
-                                                                <p className="mt-5 text-sm text-gray-600">Click here or Drag an Image!</p>
+                                                                <p className="mt-5 text-sm text-neutral-600">Click here or Drag an Image!</p>
                                                             </div>
                                                         )}
                                                     </label>
@@ -126,15 +170,18 @@ const MobileView = () => {
                                                     />
                                                 </div>
                                                 
-                                                <div className="py-7 flex items-center justify-center">
-                                                    <button className="border border-neutral-700 mx-3 rounded-md w-20 text-white py-2 bg-neutral-800 hover:text-neutral-500"
+                                                <div className="py-7 mb-20 flex items-center justify-center">
+                                                    <button className="border border-neutral-700 mx-3 rounded-md w-20 text-white py-1 bg-neutral-800 hover:text-neutral-500"
                                                         onClick={() => handlePopupClose()}>Close
                                                     </button>
                                                     <div className="flex items-center justify-start">
-                                                    <button className="border border-neutral-700 mx-3 rounded-md w-20 text-white py-2 bg-green-900 hover:text-neutral-500"
-                                                        onClick={() => handleImageSave()}>Save
+                                                    <button className="border border-neutral-700 mx-3 rounded-md w-20 text-white py-1 bg-green-900 hover:text-neutral-500"
+                                                        onClick={() => createEvent()}>Save
                                                     </button>
+                                              
                                                 </div>
+
+                                       
                                                 </div>
 
                                             </div>
@@ -190,15 +237,15 @@ const MobileView = () => {
                                             <div className="h-96">
                                                 <div className="">
                                                     <label className="text-white flex justify-center">Group Name:</label>
-                                                    <input type="text" className="border border-gray-600 mt-1 mb-4" ></input>
+                                                    <input type="text" className="py-1 border-2 border-gray-600 border-white  p-3 rounded-md bg-transparent text-white bg-black duration-1000" placeholder="Team?"></input>  
                                                 </div>
-                                                <div className="">
+                                                <div className="py-5">
                                                     <label className="text-white flex justify-center">Description:</label>
-                                                    <input type="text" className="border border-gray-600 mt-1 mb-4" />
+                                                    <input type="text" className="py-1 border-2 border-gray-600 border-white  p-3 rounded-md bg-transparent text-white bg-black duration-1000" placeholder="What's happening?"></input>  
                                                 </div>
 
                                                 <div className="">
-                                                    <label className="text-white flex justify-center">Image:</label>
+                                                    <label className="text-white flex justify-center my-5">Image:</label>
                                                     <label htmlFor="bannerImageInput">
                                                         {selectedImage ? (
                                                             <div className="h-full w-full flex-1 justify-center">
