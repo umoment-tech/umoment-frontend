@@ -140,7 +140,7 @@ const EventCard = ({ id, name, organizer, location, description, image, longX, l
                                     <h1 className="flex justify-start text-md text-white">Posted: {postTime} </h1>
                                     <h1 className="text-white font-white text-lg flex justify-end">
                                         <i class="fas fa-solid fa-users mt-1 mr-2"></i>{' '}
-                                        {attendees.length} People Attending
+                                      0 People Attending
                                     </h1>
                                 </div>
                                 <h1 className={`text-xl font-bold`}>{ }</h1>

@@ -107,7 +107,7 @@ const GroupCard = ({ id, name, description, image, members }) => {
                                 <h1 className="flex justify-start text-2xl text-white">{name} </h1>
                                 <h1 className="pb-2 text-white font-white text-xl flex justify-end">
                                     <i class="fas fa-solid fa-users mt-1 mr-2"></i>{' '}
-                                    {members.length} Members
+                                    0 Members
                                 </h1>
                             </div>
 
